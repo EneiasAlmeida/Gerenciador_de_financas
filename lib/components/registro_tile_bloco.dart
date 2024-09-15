@@ -32,7 +32,7 @@ class RegistroTileBloco extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text('Valor: R\$ ${registro.valor.toStringAsFixed(2)}'),
-              SizedBox(height: 4), // Espaço entre o subtítulo e o texto adicional
+              const SizedBox(height: 4), // Espaço entre o subtítulo e o texto adicional
               Text('Categoria: ${registro.categoria}'),
             ],
           ),
