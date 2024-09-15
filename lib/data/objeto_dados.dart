@@ -28,5 +28,12 @@ const dados = {
     valor: 60.00, 
     categoria: 'Alimentação', 
     tipo: 'Despesa'
+  ),   
+  '5': const Registro(
+    id: 5, 
+    nome: 'Comissão', 
+    valor: 60.00, 
+    categoria: 'Extra', 
+    tipo: 'Receita'
   )
 };
