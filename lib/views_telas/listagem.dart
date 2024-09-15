@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gerenciador/components/registro_tile_bloco.dart';
 import 'package:gerenciador/data/objeto_dados.dart';
 
 class Listagem extends StatelessWidget {
@@ -14,13 +15,16 @@ class Listagem extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: const Color(0x00000000),
+        //backgroundColor: const Color(0x00000000),
+         
         title: const Text('Gerenciador de Finanças'),
         centerTitle: true,
+        
+        
       ),
       body: ListView.builder(
         itemCount: lista.length,
-        itemBuilder: (ctx, indice) => Text(lista.values.elementAt(indice).nome)
+        itemBuilder: (ctx, indice) => RegistroTileBloco(registro: lista.values.elementAt(indice))
       ),
 
     );
