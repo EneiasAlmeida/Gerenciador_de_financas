@@ -25,7 +25,7 @@ class Listagem extends StatelessWidget {
 
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 25.0,
+          horizontal: 15.0,
           vertical: 15.0
         ),  // Espaço nas laterais
         child: Column(
@@ -38,12 +38,12 @@ class Listagem extends StatelessWidget {
                 ),
               ),
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 FloatingActionButton(
-                  onPressed: null, 
-                  child: Icon(Icons.add)
+                  child: const Icon(Icons.add),
+                  onPressed: () {}
                 )
               ]
             )

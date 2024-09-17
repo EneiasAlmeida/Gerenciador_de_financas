@@ -25,8 +25,8 @@ class RegistroTileBloco extends StatelessWidget {
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0), // Padding dentro do ListTile
-        title: Text(registro.nome),          
-        subtitle: Column(
+        title: Text(registro.nome),      //Jantar  no restaurante,salario,gasolina-titulo    
+        subtitle: Column(        // tem o valor e a categoria dentro
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('Valor: R\$ ${registro.valor.toStringAsFixed(2)}'),
@@ -35,6 +35,19 @@ class RegistroTileBloco extends StatelessWidget {
             //
           ],
         ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: () {}
+            ),
+            IconButton(               
+              icon: const Icon(Icons.delete),
+              onPressed: () {}
+            )
+          ],  
+        )
       ),
     ); 
   }
