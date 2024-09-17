@@ -22,11 +22,34 @@ class Listagem extends StatelessWidget {
         
         
       ),
-      body: ListView.builder(
-        itemCount: lista.length,
-        itemBuilder: (ctx, indice) => RegistroTileBloco(registro: lista.values.elementAt(indice))
-      ),
 
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 25.0,
+          vertical: 15.0
+        ),  // Espaço nas laterais
+        child: Column(
+          children: [
+            Expanded( // O ListView precisa estar dentro de um Expanded para não causar overflow
+              child: ListView.builder(
+                itemCount: lista.length,
+                itemBuilder: (ctx, indice) => RegistroTileBloco(
+                  registro: lista.values.elementAt(indice),
+                ),
+              ),
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                FloatingActionButton(
+                  onPressed: null, 
+                  child: Icon(Icons.add)
+                )
+              ]
+            )
+          ]
+        )
+      )
     );
   }
 }
