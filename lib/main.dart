@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gerenciador/views_telas/listagem.dart';
+import 'package:gerenciador/views_telas/cadastro/cadastro.dart';
+import 'package:gerenciador/views_telas/listagem/listagem.dart';
+import 'package:gerenciador/views_telas/login/login.dart';
+import 'package:gerenciador/views_telas/register/register.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,8 +13,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Listagem()
+    return MaterialApp(
+       initialRoute: '/cadastro',
+       routes: {
+        '/login': (_) => const Login(),
+        '/register': (_) => const Register(),
+        '/listagem': (_) => const Listagem(),
+        '/cadastro': (_) => const Cadastro()
+       },
     );
   }
 }
