@@ -14,10 +14,10 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-       initialRoute: '/cadastro',
+       initialRoute: '/register',
        routes: {
-        '/login': (_) => const Login(),
-        '/register': (_) => const Register(),
+        '/login': (_) => Login(),
+        '/register': (_) => Register(),
         '/listagem': (_) => const Listagem(),
         '/cadastro': (_) => const Cadastro()
        },

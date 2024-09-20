@@ -15,14 +15,10 @@ class Listagem extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        //backgroundColor: const Color(0x00000000),
-         
+        //backgroundColor: const Color(0x00000000),         
         title: const Text('Gerenciador de Finanças'),
-        centerTitle: true,
-        
-        
+        centerTitle: true, 
       ),
-
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 15.0,
@@ -43,7 +39,9 @@ class Listagem extends StatelessWidget {
               children: [
                 FloatingActionButton(
                   child: const Icon(Icons.add),
-                  onPressed: () {}
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/cadastro');
+                  }
                 )
               ]
             )
