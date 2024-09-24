@@ -21,7 +21,7 @@ class RegistroTileBloco extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 1.0),  // Borda cinza
         borderRadius: BorderRadius.circular(12.0),  // Bordas arredondadas
-        color: registro.tipo == 'Despesa' ? const Color.fromARGB(255, 234, 22, 22) : const Color.fromARGB(255, 39, 182, 46),  // Cor de fundo
+        color: registro.tipo == 'Despesa' ? const Color.fromARGB(255, 215, 130, 130) : const Color.fromARGB(255, 132, 218, 136),  // Cor de fundo
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0), // Padding dentro do ListTile

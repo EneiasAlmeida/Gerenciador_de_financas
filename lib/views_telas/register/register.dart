@@ -13,7 +13,13 @@ class Register extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Seja Bem Vindo'),
+        title: const Text('Seja Bem Vindo',
+          style: TextStyle(
+          fontWeight: FontWeight.bold, // Define o texto em negrito
+          fontSize: 20, // Define a fonte
+      ),       
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(25),
@@ -64,6 +70,14 @@ class Register extends StatelessWidget {
                       //registrar o usuário
                     }
                 }, 
+                style: ButtonStyle(
+    backgroundColor: WidgetStateProperty.all<Color>(
+      const Color.fromARGB(255, 11, 12, 11), // Cor de fundo verde
+    ),
+    foregroundColor: WidgetStateProperty.all<Color>(
+      const Color.fromARGB(255, 246, 243, 243), // Cor do texto preta
+    ),
+  ),
                 child: const Text('Entrar'),
               ),
             ],

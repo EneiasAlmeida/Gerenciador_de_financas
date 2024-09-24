@@ -35,5 +35,19 @@ const dados = {
     valor: 60.00, 
     categoria: 'Extra', 
     tipo: 'Receita'
+  ),
+  '6': Registro(
+    id: 6, 
+    nome: 'Manutenção do carro', 
+    valor: 600.00, 
+    categoria: 'Transporte', 
+    tipo: 'Despesa'
+  ),
+  '7': Registro(
+    id: 3, 
+    nome: 'Troca de Óleo', 
+    valor: 150.00, 
+    categoria: 'Transporte', 
+    tipo: 'Despesa'  
   )
 };

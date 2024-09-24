@@ -24,10 +24,16 @@ class CampoTextoPersonalizado extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 16),
       child: TextFormField(
         validator: validator,
+        style: const TextStyle(color: Colors.black), // **Texto preto**
         decoration: InputDecoration(
-          labelText: label,
-          border: const OutlineInputBorder(),
+        labelText: label,
+        filled: true,
+        fillColor: Colors.grey[300], // **Cor de fundo cinza**
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0), // Borda arredondada
         ),
+      ),
+        
         keyboardType: inputType,
         obscureText: isPassword,
         controller: controller,
