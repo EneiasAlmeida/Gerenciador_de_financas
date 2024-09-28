@@ -40,15 +40,17 @@ class Register extends StatelessWidget {
                 },
               ),
               CampoTextoPersonalizado(
-                controller: _passwordController,
+                controller: _passwordController,//controller é a propriedade
                 label: 'Senha',
                 inputType: TextInputType.visiblePassword,
                 validator: (value) {
+                  //validator vai rodara função- o valor é nulo?-  tem menos que 8 caracteres? se sim  vai retornar  senha invalida
                   if (value == null || value.length < 8) {
                     return 'Senha inválida!'; 
                   }
                   return null; //Tudo ok
                 },
+
                 isPassword: true
               ),
               CampoTextoPersonalizado(
@@ -67,8 +69,8 @@ class Register extends StatelessWidget {
               FilledButton(
                 onPressed: () {
                   if(_formKey.currentState!.validate()){
-                      //registrar o usuário
-                    }
+                    //registrar o usuário
+                  }
                 }, 
                 style: ButtonStyle(
     backgroundColor: WidgetStateProperty.all<Color>(

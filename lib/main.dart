@@ -4,13 +4,14 @@ import 'package:gerenciador/views_telas/cadastro/cadastro.dart';
 import 'package:gerenciador/views_telas/listagem/listagem.dart';
 import 'package:gerenciador/views_telas/login/login.dart';
 import 'package:gerenciador/views_telas/register/register.dart';
+import 'package:gerenciador/views_telas/transporte/transporte.dart';
 
 void main() {
   runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  const MainApp({super.key}); 
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,8 @@ class MainApp extends StatelessWidget {
         '/login': (_) => Login(),
         '/register': (_) => Register(),
         '/listagem': (_) => const Listagem(),
-        '/cadastro': (_) => const Cadastro()
+        '/cadastro': (_) => Cadastro(),
+        '/transporte': (_) => const Transporte()
       },
     );
   }
