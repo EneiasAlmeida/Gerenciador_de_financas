@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador/components/registro_tile_bloco.dart';
+import 'package:gerenciador/components/usuario_logado.dart';
 import 'package:gerenciador/data/objeto_dados.dart';
 
 class Listagem extends StatelessWidget {
@@ -16,10 +17,13 @@ class Listagem extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.onPrimary,
       appBar: AppBar(
-        //backgroundColor: const Color(0x00000000),         
+        backgroundColor: const Color(0x00000000),         
         title: const Text('Gerenciador de Finanças'),
-        titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-        centerTitle: true, 
+        titleTextStyle: Theme.of(context).textTheme.headlineSmall,
+        actions: const [
+          UsuarioLogado()
+        ]
+        //centerTitle: true, 
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(

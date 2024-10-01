@@ -72,14 +72,14 @@ class Register extends StatelessWidget {
                     //registrar o usuário
                   }
                 }, 
-                style: ButtonStyle(
-    backgroundColor: WidgetStateProperty.all<Color>(
-      const Color.fromARGB(255, 11, 12, 11), // Cor de fundo verde
-    ),
-    foregroundColor: WidgetStateProperty.all<Color>(
-      const Color.fromARGB(255, 246, 243, 243), // Cor do texto preta
-    ),
-  ),
+                style: ButtonStyle(                   //Estilo do botão
+                  backgroundColor: WidgetStateProperty.all<Color>( // backgroundColor=Cor de fundo
+                    Theme.of(context).colorScheme.primary 
+                  ),
+                  foregroundColor: WidgetStateProperty.all<Color>(  // foregroundColor=cor do primeiro plano
+                    Theme.of(context).colorScheme.onPrimary // Cor do texto preta
+                  ),
+                ),
                 child: const Text('Entrar'),
               ),
             ],

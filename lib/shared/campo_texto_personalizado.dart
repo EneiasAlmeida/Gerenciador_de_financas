@@ -23,29 +23,35 @@ class CampoTextoPersonalizado extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: TextFormField(
-        validator: validator,
-        style: const TextStyle(color: Colors.black), // **Texto preto**
-        decoration: InputDecoration(
-        labelText: label,
-        filled: true,
-        fillColor: const Color.fromARGB(255, 233, 224, 224), // **Cor de fundo cinza**
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0), // Borda arredondada
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
+      color: Theme.of(context).colorScheme.onPrimary,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 0),
+        child: TextFormField(
+          validator: validator,
+          style: Theme.of(context).textTheme.bodySmall,
+          //const TextStyle(color: Colors.black), // **Texto preto**
+          decoration: InputDecoration(
+          labelText: label,
+          labelStyle: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+          filled: true,
+          fillColor: Theme.of(context).colorScheme.secondary,
+          //const Color.fromARGB(255, 233, 224, 224),// **Cor de fundo cinza**
+          border: OutlineInputBorder(                 //contorno da borda
+            borderRadius: BorderRadius.circular(8.0), // Borda arredondada
+          ),
         ),
-      ),
-      
-        inputFormatters: onlyNumbers ? <TextInputFormatter> [
-          FilteringTextInputFormatter.digitsOnly
-        ] : null,
-        keyboardType: inputType,
-        obscureText: isPassword,
-        controller: controller,
-        textInputAction: action,
         
-      ),
-    );
+          inputFormatters: onlyNumbers ? <TextInputFormatter> [
+            FilteringTextInputFormatter.digitsOnly
+          ] : null,
+          keyboardType: inputType,
+          obscureText: isPassword,
+          controller: controller,
+          textInputAction: action,
+        ),
+      )
+    );   
   }
 }
