@@ -17,7 +17,7 @@ class Listagem extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.onPrimary,
       appBar: AppBar(
-        backgroundColor: const Color(0x00000000),         
+        backgroundColor: const Color(0xFF000000),         
         title: const Text('Gerenciador de Finanças'),
         titleTextStyle: Theme.of(context).textTheme.headlineSmall,
         actions: const [
@@ -25,6 +25,7 @@ class Listagem extends StatelessWidget {
         ]
         //centerTitle: true, 
       ),
+      
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 15.0,

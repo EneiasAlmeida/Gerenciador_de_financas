@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador/models/registro.dart';
+import 'package:gerenciador/repository/registro_repository.dart';
 
 class RegistroTileBloco extends StatelessWidget {
   final Registro registro;
@@ -40,11 +41,19 @@ class RegistroTileBloco extends StatelessWidget {
           children: [
             IconButton(
               icon: const Icon(Icons.edit),
-              onPressed: () {}
+              onPressed: () {
+                Navigator.pushNamed(
+                  context, 
+                  '/cadastro',
+                  arguments: {registro}
+                );
+              }
             ),
             IconButton(               
               icon: const Icon(Icons.delete),
-              onPressed: () {}
+              onPressed: () {
+                RegistroRepository.delete(registro.id!);
+              }
             )
           ],  
         )

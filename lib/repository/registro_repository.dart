@@ -30,13 +30,13 @@ class RegistroRepository {
     );   
   } 
   
-  static Future<int> update(int id, Map<String, Object?> registroAtualizado) async{
+  static Future<int> update(Map<String, Object?> registroAtualizado) async{
     final db = await DBHelper.getInstancia();
     return await db.update(
       _tableName,
       registroAtualizado,
       where: 'id = ?',
-      whereArgs: [id] 
+      whereArgs: [registroAtualizado['id']] 
     );
   }
 

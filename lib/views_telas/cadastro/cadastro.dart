@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gerenciador/models/registro.dart';
+import 'package:gerenciador/repository/registro_repository.dart';
 import 'package:gerenciador/shared/campo_texto_personalizado.dart';
 
 class Cadastro extends StatelessWidget {
@@ -10,9 +12,12 @@ class Cadastro extends StatelessWidget {
   final _tipoController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   
-
   @override
   Widget build(BuildContext context) {
+    final registroExistente = ModalRoute.of(context)!.settings.arguments as Registro;
+    final ehEdicao = registroExistente.toMap().isNotEmpty;
+    int id = 0;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cadastro de Registro'),
@@ -70,14 +75,41 @@ class Cadastro extends StatelessWidget {
                   return null;
                 },
               ),
+               const SizedBox(height: 16), // Espaço entre os campos e os botões
               FilledButton(
-                onPressed: () {
-                    if(_formKey.currentState!.validate()){
-                      //cadastrar um registro
+                onPressed: () async{
+                  if(_formKey.currentState!.validate()){
+                    final registro = Registro(
+                      id: ehEdicao ? registroExistente.id : null,
+                      nome: _nomeController.text,
+                      valor: double.parse(_valorController.text), // ométodo parse esta transformando  a string num double
+                      categoria: _categoriaController.text,
+                      tipo: _tipoController.text
+                    );
+
+                    if (ehEdicao){
+                      // Edição
+                      id = await RegistroRepository.update(registro.toMap());  
                     }
-                  },  
-                child: const Text('Cadastrar'),
+                    else{
+                      // Cadastro
+                      id = await RegistroRepository.insert(registro.toMap());  
+                    }
+
+                    if (id > 0){
+                      Navigator.pushNamed(context, '/listagem');  
+                    }              
+                  } 
+                },   
+                child: const Text('Cadastrar')
               ),
+               const SizedBox(height: 16), // Espaço entre os botões
+              FilledButton(
+                onPressed: () {     //onPressed é uma propriedade
+                  Navigator.pushNamed(context, '/listagem');
+                },  
+                child: const Text('Cancelar')
+              )  
             ],
           ),
         )

@@ -13,12 +13,11 @@ class UsuarioLogado extends StatelessWidget {
           const Text('Enéias'),
           FilledButton( 
             //colocar margin no row 
-            onPressed: () {
-              
+            onPressed: () {        
             }, 
             child: const Text('Sair')
           )
-        ]    
-    );    
+      ]    
+    ); 
   }    
 }
