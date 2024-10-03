@@ -14,68 +14,56 @@ class Listagem extends StatelessWidget {
     final registroStore = Provider.of<RegistroStore>(context);
     final repository = Provider.of<RegistroRepository>(context);
 
-    //List<Registro> lista = [];
-    //const lista = {...dados};
-    //const lista = [dados];
-
-    //Widget metodo(BuildContext ctx, int i) {}
-    //(BuildContext ctx, int i) => {}
-
     // Calcula as somas de despesas e receitas
     double totalDespesas = 0;
     double totalReceitas = 0;
 
     for (var registro in registroStore.registros) {
       if (registro.tipo == 'despesa') {
-        totalDespesas += registro.valor; //Supondo que o 'valor' seja um a propriedade do registro
+        totalDespesas += registro.valor;
       } else if (registro.tipo == 'receita') {
-          totalReceitas += registro.valor;
+        totalReceitas += registro.valor;
       }
     }
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.onPrimary,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF000000),         
+        backgroundColor: const Color(0xFF000000),
         title: const Text('Gerenciador de Finanças'),
         titleTextStyle: Theme.of(context).textTheme.headlineSmall,
-        actions: const [
-          UsuarioLogado()
-        ]
-        //centerTitle: true, 
+        actions: const [UsuarioLogado()],
       ),
-      
       body: FutureBuilder<List<Registro>>(
-        future: repository.findAll(),
+        // Carregar os registros do repositório
+        future: repository.findAll(), 
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
-          } 
+          }
 
           if (snapshot.hasError) {
             return Center(child: Text('Erro: ${snapshot.error}'));
-          } 
+          }
 
+          // Se os dados do snapshot forem válidos, carregamos no registroStore
           if (snapshot.hasData) {
             registroStore.load(snapshot.data!);
           }
 
           return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 15.0,
-              vertical: 15.0
-            ),  // Espaço nas laterais
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
             child: Column(
               children: [
-                Expanded( // O ListView precisa estar dentro de um Expanded para não causar overflow
+                Expanded(
                   child: ListView.builder(
                     itemCount: registroStore.registros.length,
                     itemBuilder: (ctx, indice) => RegistroTileBloco(
-                      registro: registroStore.registros[indice]
+                      registro: registroStore.registros[indice],
                     ),
                   ),
                 ),
-                //Adiciona a linha com as somas
+                // Adiciona a linha com as somas
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -84,41 +72,42 @@ class Listagem extends StatelessWidget {
                         margin: const EdgeInsets.only(right: 10),
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red, // Cor de fundo vermelha
+                            backgroundColor: Colors.red,
                           ),
-                          onPressed: () {
-                            //Ação das despesas se necessário
-                          },
-                          icon: const Icon(Icons.remove), //Ícone de despesa
-                          label: Text('Despesas: R\$ ${totalDespesas.toStringAsFixed(2)}'), 
+                          onPressed: () {},
+                          icon: const Icon(Icons.remove),
+                          label: Text('Despesas: R\$ ${totalDespesas.toStringAsFixed(2)}'),
                         ),
                       ),
                     ),
                     Expanded(
                       child: Container(
-                        margin: const EdgeInsets.only(left:10),
+                        margin: const EdgeInsets.only(left: 10),
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green, // Cor de fundo verde
+                            backgroundColor: Colors.green,
                           ),
-                          onPressed: () {
-                            //Ação das receitas se necessário
-                          },
-                          icon: const Icon(Icons.add), //Ícone de receita
+                          onPressed: () {},
+                          icon: const Icon(Icons.add),
                           label: Text('Receitas: R\$ ${totalReceitas.toStringAsFixed(2)}'),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
-                const SizedBox(height: 10), // Espaços entre o botao eo FAB
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     FloatingActionButton(
                       child: const Icon(Icons.add),
-                      onPressed: (){
-                        Navigator.pushNamed(context, '/cadastro');
+                      onPressed: () async {
+                        final result = await Navigator.of(context).pushNamed("/cadastro");
+                        if (result == true) {
+                          // Recarregar os registros após retorno da tela de cadastro
+                          final updatedRecords = await repository.findAll();
+                          registroStore.load(updatedRecords);
+                        }
                       }
                     )
                   ]

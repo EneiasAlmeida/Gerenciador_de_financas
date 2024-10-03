@@ -14,7 +14,7 @@ class RegistroRepository {
     final db = await DBHelper.getInstancia();
     final result = await db.query(
       _tableName,
-      orderBy: 'name', // name (asc) vai tazer ascendente- ou name desc( vai trazer de Z para A)  
+      orderBy: 'nome', // name (asc) vai tazer ascendente- ou name desc( vai trazer de Z para A)  
     );
 
     //aqui o map é coleção e não mapa 
