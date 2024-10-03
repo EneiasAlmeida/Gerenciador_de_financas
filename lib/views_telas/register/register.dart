@@ -70,6 +70,7 @@ class Register extends StatelessWidget {
                 onPressed: () {
                   if(_formKey.currentState!.validate()){
                     //registrar o usuário
+                    Navigator.pushNamed(context, '/login');
                   }
                 }, 
                 style: ButtonStyle(                   //Estilo do botão
@@ -80,7 +81,7 @@ class Register extends StatelessWidget {
                     Theme.of(context).colorScheme.onPrimary // Cor do texto preta
                   ),
                 ),
-                child: const Text('Entrar'),
+                child: const Text('Registrar-se'),
               ),
             ],
          ),

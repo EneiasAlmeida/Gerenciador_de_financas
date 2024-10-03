@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador/models/registro.dart';
 import 'package:gerenciador/repository/registro_repository.dart';
+import 'package:gerenciador/store/registro_store.dart';
+import 'package:provider/provider.dart';
 
 class RegistroTileBloco extends StatelessWidget {
   final Registro registro;
@@ -17,6 +19,9 @@ class RegistroTileBloco extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final registroStore = Provider.of<RegistroStore>(context);
+    final repository = Provider.of<RegistroRepository>(context);
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0),  // Espaço entre os registros
       decoration: BoxDecoration(
@@ -45,14 +50,15 @@ class RegistroTileBloco extends StatelessWidget {
                 Navigator.pushNamed(
                   context, 
                   '/cadastro',
-                  arguments: {registro}
+                  arguments: registro
                 );
               }
             ),
             IconButton(               
               icon: const Icon(Icons.delete),
-              onPressed: () {
-                RegistroRepository.delete(registro.id!);
+              onPressed: () async {
+                await repository.delete(registro.id!);
+                registroStore.remove(registro.id!);
               }
             )
           ],  

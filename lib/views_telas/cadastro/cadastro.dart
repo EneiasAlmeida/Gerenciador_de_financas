@@ -1,7 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:gerenciador/models/registro.dart';
 import 'package:gerenciador/repository/registro_repository.dart';
 import 'package:gerenciador/shared/campo_texto_personalizado.dart';
+import 'package:gerenciador/store/registro_store.dart';
+import 'package:provider/provider.dart';
 
 class Cadastro extends StatelessWidget {
   Cadastro({super.key}); 
@@ -14,9 +18,19 @@ class Cadastro extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    final registroExistente = ModalRoute.of(context)!.settings.arguments as Registro;
-    final ehEdicao = registroExistente.toMap().isNotEmpty;
-    int id = 0;
+    final registroStore = Provider.of<RegistroStore>(context);
+    final repository = Provider.of<RegistroRepository>(context);
+
+    final registroExistente = ModalRoute.of(context)!.settings.arguments as Registro?;
+    final ehEdicao = registroExistente != null; // != Não é null ou é diferente de null
+    
+    //Quando for edição vai vir os campos preenchidos com os valores do registro
+    if (ehEdicao) {
+      _nomeController.text = registroExistente.nome;
+      _valorController.text = registroExistente.valor.toString();
+      _categoriaController.text = registroExistente.categoria;
+      _tipoController.text = registroExistente.tipo;    
+    } 
 
     return Scaffold(
       appBar: AppBar(
@@ -79,7 +93,7 @@ class Cadastro extends StatelessWidget {
               FilledButton(
                 onPressed: () async{
                   if(_formKey.currentState!.validate()){
-                    final registro = Registro(
+                    Registro registro = Registro(   //vai criar um objeto com os valores preenchidos
                       id: ehEdicao ? registroExistente.id : null,
                       nome: _nomeController.text,
                       valor: double.parse(_valorController.text), // ométodo parse esta transformando  a string num double
@@ -87,17 +101,20 @@ class Cadastro extends StatelessWidget {
                       tipo: _tipoController.text
                     );
 
-                    if (ehEdicao){
+                    if (ehEdicao){ 
                       // Edição
-                      id = await RegistroRepository.update(registro.toMap());  
+                      registro.id = await repository.update(registro.toMap());  // se for edição vai atualizar o registro no banco
                     }
                     else{
                       // Cadastro
-                      id = await RegistroRepository.insert(registro.toMap());  
+                      //se for cadastro vai inserir o registro no banco
+                      registro.id = await repository.insert(registro.toMap());  
+                      registroStore.add(registro);
                     }
 
-                    if (id > 0){
-                      Navigator.pushNamed(context, '/listagem');  
+                    if (registro.id! > 0){
+                      
+                      Navigator.pushNamed(context, '/listagem');  //vai voltar para a listagem 
                     }              
                   } 
                 },   

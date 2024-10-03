@@ -8,7 +8,7 @@ class Transporte extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Filtrando os registros cuja categoria seja "Transporte"
-    final listaTransporte = dados.values.where((registro) {
+    final listaTransporte = dados.where((registro) {
       return registro.categoria == 'Transporte'; // Verifica se a categoria é "Transporte"
     }).toList();
      final somaValores = listaTransporte.fold(0.0, (sum, item) => sum + item.valor);

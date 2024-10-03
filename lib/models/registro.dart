@@ -1,11 +1,11 @@
 class Registro {
-  final int? id;
-  final String nome;
-  final double valor;
-  final String categoria;
-  final String tipo;
+  int? id;
+  String nome;
+  double valor;
+  String categoria;
+  String tipo;
 
-  const Registro({
+  Registro({
     this.id,
     required this.nome,
     required this.valor,

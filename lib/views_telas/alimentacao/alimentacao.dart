@@ -11,7 +11,7 @@ class Alimentacao extends StatelessWidget {
   @override
   Widget build(BuildContext context) {                   //o buid é um médodo- tudo que estiver dentro da chave (roxa) esta dentro do método
     //Filtrando os registros cuja categoria seja "Alimentação"
-    final listaAlimentacao = dados.values.where((registro) {     // where= onde tb é um método-serve para filtrar  dados em uma lista e trazer 
+    final listaAlimentacao = dados.where((registro) {     // where= onde tb é um método-serve para filtrar  dados em uma lista e trazer 
       return registro.categoria == 'Alimentacao'; // Verifica se a categoria é "Transporte"
     }).toList();
       

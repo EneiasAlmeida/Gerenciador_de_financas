@@ -4,24 +4,24 @@ import 'package:gerenciador/repository/db_helper.dart';
 class RegistroRepository {
   static const _tableName = 'registro';//registro é o nome da tabela
   
-  static Future<int> insert(Map<String, Object?> map) async {//insert= inserir um registro na tabela do BD  --
+  Future<int> insert(Map<String, Object?> map) async {//insert= inserir um registro na tabela do BD  --
     final db = await DBHelper.getInstancia();
     return await db.insert(_tableName, map);
   }
 
-  static Future<List<Registro>> findAll(int idUsuario) async{ //findAll= encontre todos-esse é um método/função
+  // findAll= encontre todos-esse é um método/função
+  Future<List<Registro>> findAll() async{ 
     final db = await DBHelper.getInstancia();
     final result = await db.query(
       _tableName,
-      where: 'idUsuario = ?',
-      whereArgs: [idUsuario],
-      orderBy: 'name', // name (asc)vai tazer ascendente- ou name desc( vai trazer de Z para A)  
+      orderBy: 'name', // name (asc) vai tazer ascendente- ou name desc( vai trazer de Z para A)  
     );
-    return result.map((item)=>Registro.fromMap(item)).toList();
+
     //aqui o map é coleção e não mapa 
+    return result.map((item)=>Registro.fromMap(item)).toList();
   }
 
-  static Future<int> delete(int id) async{
+  Future<int> delete(int id) async{
     final db = await DBHelper.getInstancia();
     return await db.delete(
       _tableName,
@@ -30,7 +30,7 @@ class RegistroRepository {
     );   
   } 
   
-  static Future<int> update(Map<String, Object?> registroAtualizado) async{
+  Future<int> update(Map<String, Object?> registroAtualizado) async{
     final db = await DBHelper.getInstancia();
     return await db.update(
       _tableName,
@@ -40,7 +40,7 @@ class RegistroRepository {
     );
   }
 
-  static Future<Map<String, Object?>> getRegistro(int id) async{
+  Future<Map<String, Object?>> getRegistro(int id) async{
     final db = await DBHelper.getInstancia(); 
     final result = await db.query(
       _tableName,
